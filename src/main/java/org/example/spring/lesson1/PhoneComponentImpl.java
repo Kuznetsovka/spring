@@ -15,6 +15,17 @@ public class PhoneComponentImpl implements Phone {
         @Value("false")
         private boolean charge;
 
+    @Autowired()
+    @Qualifier("SimMegafon")
+    public void setSimcard(Simcard simcard) {
+        this.simcard = simcard;
+    }
+
+    @Override
+    public void putSimcard() {
+        simcard.processing ();
+    }
+
     @Override
         public void ring() {
             if (broken) {
@@ -43,12 +54,6 @@ public class PhoneComponentImpl implements Phone {
     public void hungUp() {
         System.out.println ("Звонок завершен!");
     }
-
-    @Autowired(required=false)
-        @Qualifier("simMTS")
-        public void setSimcard(Simcard simcard) {
-            this.simcard = simcard;
-        }
 
     @Override
     public boolean isCharged() {

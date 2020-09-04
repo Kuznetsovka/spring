@@ -34,6 +34,11 @@ public class PhoneImpl implements Phone{
     }
 
     @Override
+    public void putSimcard() {
+        simcard.processing ();
+    }
+
+    @Override
     public void ring() {
         if (broken) {
             System.out.println("Phone is BROKEN!!!");

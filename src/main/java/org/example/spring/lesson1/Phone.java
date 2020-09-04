@@ -10,4 +10,5 @@ public interface Phone {
     void setSimcard(Simcard simcard);
     boolean isCharged();
     boolean isBroken();
+    void putSimcard();
 }

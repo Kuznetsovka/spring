@@ -14,6 +14,7 @@ public class Client {
         phone.hungUp ();
         ApplicationContext contextApp = new AnnotationConfigApplicationContext (AppConfig.class);
         Phone phone2 = contextApp.getBean("phoneComponent", Phone.class);
+        phone2.putSimcard();
         phone2.charging ();
         phone2.ring();
         phone2.hungUp ();
