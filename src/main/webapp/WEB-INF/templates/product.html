@@ -5,26 +5,24 @@
     <title>Products</title>
 </head>
 <body>
-
-
-<table border="1">
-    <tr>
-        <td>Id</td>
-        <td th:text="${product.id}">Id</td>
-    </tr>
-    <tr>
-        <td>Title</td>
-        <td th:text="${product.title}">Title</td>
-    </tr>
-    <tr>
-        <td>Price</td>
-        <td th:text="${product.price}">10.22</td>
-    </tr>
-    <tr>
-        <td>Link</td>
-        <td th:text="${product.link}">Link</td>
-    </tr>
-</table>
-
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td th:text="${product.id}">Id</td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td th:text="${product.title}">Title</td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td th:text="${product.price}">10.22</td>
+        </tr>
+            <td>Link</td>
+            <td th:text="${product.link}">Link</td>
+        <!-- Почему-то так не работает-->
+        <!--        <td><a href="${product.link}" title="${product.link}"></a>Link</td>-->
+        </tr>
+    </table>
 </body>
 </html>
