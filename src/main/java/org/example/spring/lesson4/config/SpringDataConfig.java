@@ -23,9 +23,7 @@ public class SpringDataConfig implements WebMvcConfigurer {
 
     @Bean(name="dataSource")
     public DataSource getDataSource() {
-
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
         dataSource.setUrl("jdbc:mysql://localhost:3306/market?serverTimezone=UTC");
         dataSource.setUsername("root");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
