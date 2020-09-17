@@ -20,8 +20,7 @@
         </tr>
             <td>Link</td>
             <td th:text="${product.link}">Link</td>
-        <!-- Почему-то так не работает-->
-        <!--        <td><a href="${product.link}" title="${product.link}"></a>Link</td>-->
+                <td><a th:href="${product.link}" title="${product.link}"></a>Link</td>
         </tr>
     </table>
 </body>

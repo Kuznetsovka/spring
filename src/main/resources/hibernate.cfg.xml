@@ -16,6 +16,5 @@
         <property name="hibernate.hbm2ddl.auto">validate</property>
         <mapping class="org.example.spring.lesson3.Customer"/>
         <mapping class="org.example.spring.lesson3.Product"/>
-
     </session-factory>
 </hibernate-configuration>
