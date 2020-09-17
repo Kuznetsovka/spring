@@ -7,6 +7,7 @@ import java.util.List;
 public interface ProductDAO {
     List<Product> findAll();
     Product findById(Long id);
+    List<Product> findByName(String name);
     Product findMaxPrice();
     Product findMinPrice();
     void save(Product product);
