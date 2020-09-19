@@ -32,18 +32,18 @@ public class ProductJpqlDAOImpl implements ProductDAO {
 
     @Override
     public Product findMaxPrice() {
-        return em.createQuery("SELECT p FROM Products p ORDER BY price_fld DESC LIMIT 1", Product.class)
+        return em.createQuery("SELECT p FROM Product p ORDER BY price_fld DESC LIMIT 1", Product.class)
                 .getSingleResult();
     }
 
     @Override
     public Product findMinPrice() {
-        return em.createQuery("SELECT p FROM Products p ORDER BY price_fld ASC LIMIT 1", Product.class)
+        return em.createQuery("SELECT p FROM Product p ORDER BY price_fld ASC LIMIT 1", Product.class)
                 .getSingleResult();
     }
 
     public List<Product> findAllByIdBetween(Double start, Double end){
-        return em.createQuery("SELECT p FROM Products BETWEEN p.price=" + start + " AND p.price=" + end, Product.class)
+        return em.createQuery("SELECT p FROM Product BETWEEN p.price=" + start + " AND p.price=" + end, Product.class)
                 .getResultList();
     }
 

@@ -17,10 +17,10 @@
         <td><p th:each="product : ${products}" th:text="${product.price}"/></td>
     </tr>
 </table>
-<form action="#" th:action="@{/products/maxprice}" method="post">
+<form action="#" th:action="@{/products/maxupprice}" method="post">
     <button type="submit">Filter Up</button>
 </form>
-<form action="#" th:action="@{/products/minprice}" method="post">
+<form action="#" th:action="@{/products/minupprice}" method="post">
     <button type="submit">Filter Down</button>
 </form>
 </body>

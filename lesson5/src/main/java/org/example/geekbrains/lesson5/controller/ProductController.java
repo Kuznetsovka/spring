@@ -4,6 +4,7 @@ import org.example.geekbrains.lesson5.InitData;
 import org.example.geekbrains.lesson5.domain.Product;
 import org.example.geekbrains.lesson5.domain.User;
 import org.example.geekbrains.lesson5.service.ProductServiceImpl;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
+    Model model;
     List<Product> products = InitData.getProducts ();
     private final ProductServiceImpl service;
 
@@ -123,32 +125,30 @@ public class ProductController {
         return "list";
     }
 
-    // http://localhost:8090/app/products/maxprice - GET
-    @RequestMapping("/maxprice")
+    // http://localhost:8090/app/products/maxupprice - GET
+    @RequestMapping("/maxupprice")
     public String maxPriceProduct(Model model){
-        Product maxProduct = service.getProductJpaDAOImpl ().findMaxPrice ();
-        model.addAttribute("product", maxProduct == null ? new Product(): maxProduct);
+        List<Product> products = service.getProductJpaDAO ().findAll (Sort.by("price").descending ());
+        model.addAttribute("products", products);
         return "list";
     }
 
-    // http://localhost:8090/app/products/minprice - GET
-    @RequestMapping("/minprice")
+    // http://localhost:8090/app/products/minupprice - GET
+    @RequestMapping("/minupprice")
     public String minPriceProduct(Model model){
-        Product minProduct = service.getProductJpaDAOImpl ().findMinPrice ();
-        model.addAttribute("product", minProduct == null ? new Product(): minProduct);
+        List<Product> products = service.getProductJpaDAO ().findAll (Sort.by("price").ascending());
+        model.addAttribute("products", products);
         return "list";
     }
 
-    @PostMapping("/minprice")
+    @PostMapping("/minupprice")
     public String minPriceProduct(User userForm){
-        List<Product> products = service.getProductJpaDAOImpl ().filterMinPrice ();
-        return "list";
+        return "redirect:/products/minupprice";
     }
 
-    @PostMapping("/maxprice")
+    @PostMapping("/maxupprice")
     public String maxPriceProduct(User userForm){
-        List<Product> products = service.getProductJpaDAOImpl ().filterMaxPrice ();
-        return "list";
+        return "redirect:/products/maxupprice";
     }
 
 }

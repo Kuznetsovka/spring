@@ -92,8 +92,7 @@ public class ProductController {
     @RequestMapping(value = "/delete")
     public String removeById(Model model,
                              @RequestParam(name = "id") long id){
-        List<Product> products = productService.removeById (id);
-        model.addAttribute ("products",products);
+        productService.removeById (id);
         System.out.println("Удален продукт с id" + id);
         return "list";
     }
