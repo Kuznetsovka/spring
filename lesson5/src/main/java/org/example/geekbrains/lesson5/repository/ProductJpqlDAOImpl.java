@@ -46,7 +46,7 @@ public class ProductJpqlDAOImpl implements ProductDAO {
                 .getSingleResult();
     }
 
-    public List<Product> findAllByIdBetween(Double start, Double end){
+    public List<Product> findAllBetween(Double start, Double end){
         return em.createQuery("SELECT p FROM Products BETWEEN p.price=" + start + " AND p.price=" + end, Product.class)
                 .getResultList();
     }

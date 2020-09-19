@@ -23,6 +23,15 @@ public class Product {
     @Column(name = "price_fld")
     private Float price;
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    private String link;
 
     public Float getPrice() {
         return price;

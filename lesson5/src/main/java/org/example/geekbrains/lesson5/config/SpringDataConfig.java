@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories("org.example.spring.lesson5.repository")
+@EnableJpaRepositories("org.example.geekbrains.lesson5.repository")
 @EnableTransactionManagement
 public class SpringDataConfig implements WebMvcConfigurer {
 
@@ -34,7 +34,6 @@ public class SpringDataConfig implements WebMvcConfigurer {
         // Создаем класса фабрики, реализующей интерфейс
         // FactoryBean<EntityManagerFactory>
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-
         // Задаем источник подключения
         factory.setDataSource(getDataSource());
 
@@ -44,7 +43,7 @@ public class SpringDataConfig implements WebMvcConfigurer {
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         // Указание пакета, в котором будут находиться классы-сущности
-        factory.setPackagesToScan("org.example.spring.lesson5.domain");
+        factory.setPackagesToScan("org.example.geekbrains.lesson5.domain");
 
         // Создание свойств для настройки Hibernate
         Properties jpaProperties = new Properties ();

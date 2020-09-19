@@ -19,6 +19,7 @@ public class InitData {
                 Product product = new Product ();
                 product.setName ("Product_" + i++);
                 product.setPrice ((float) (Math.random ()*1000));
+                product.setLink ( "http://localhost:8090/app/products/delete?id="+ i);
                 products.add (product);
             }
     }

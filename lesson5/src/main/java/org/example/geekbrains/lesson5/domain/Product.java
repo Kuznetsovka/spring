@@ -23,9 +23,20 @@ public class Product {
     @Column(name = "price_fld")
     private Float price;
 
+    @Transient
+    private String link;
+
 
     public Float getPrice() {
         return price;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public void setPrice(Float price) {

@@ -11,4 +11,6 @@ public interface ProductJpaDAO extends JpaRepository<Product, Long> {
     List<Product> findAllByNameLike(String name);
     List<Product> findAllByIdBetween(Long startId, Long endId);
 
+    @Override
+    void deleteById(Long aLong);
 }
