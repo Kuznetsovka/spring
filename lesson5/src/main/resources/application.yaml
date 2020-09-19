@@ -3,6 +3,7 @@ server:
   servlet:
     context-path: /app
 
+
 spring:
   jpa:
     hibernate:
@@ -11,5 +12,11 @@ spring:
     url: jdbc:mysql://localhost:3306/market?serverTimezone=UTC
     username: root
     password: Nbirf
+
+
+
+
+
+
 
 

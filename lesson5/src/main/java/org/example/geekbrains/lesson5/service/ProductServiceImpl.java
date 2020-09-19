@@ -40,4 +40,9 @@ public class ProductServiceImpl {
         return productJpaDAO.findById(id).orElse(null).getName ();
     }
 
+    @Transactional
+    public void delete(Long id){
+        productJpaDAO.deleteById (id);
+    }
+
 }

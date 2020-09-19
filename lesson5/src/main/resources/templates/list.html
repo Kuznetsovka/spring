@@ -7,7 +7,21 @@
 <body>
 
 <h1>All products</h1>
-<p th:each="product : ${products}" th:text="${product.name}"/>
-
+<table border="1">
+    <tr>
+        <td>Title</td>
+        <td>Price</td>
+    </tr>
+    <tr>
+        <td><p th:each="product : ${products}" th:text="${product.name}"/></td>
+        <td><p th:each="product : ${products}" th:text="${product.price}"/></td>
+    </tr>
+</table>
+<form action="#" th:action="@{/products/maxprice}" method="post">
+    <button type="submit">Filter Up</button>
+</form>
+<form action="#" th:action="@{/products/minprice}" method="post">
+    <button type="submit">Filter Down</button>
+</form>
 </body>
 </html>

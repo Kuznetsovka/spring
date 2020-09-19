@@ -9,9 +9,9 @@ public class InitData {
 
     private static long ind = 99;
 
-    private static ArrayList<Product> products = new ArrayList<Product> ();
+    private static ArrayList<Product> products = new ArrayList<> ();
 
-    public static final double COUNT_PRODUCTS = 20;
+    public static final double COUNT_PRODUCTS = 5;
 
     static {
             int i = 0;
@@ -19,7 +19,6 @@ public class InitData {
                 Product product = new Product ();
                 product.setName ("Product_" + i++);
                 product.setPrice ((float) (Math.random ()*1000));
-                product.setLink ( "http://localhost:8090/app/products/delete?id="+ i);
                 products.add (product);
             }
     }

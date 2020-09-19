@@ -10,6 +10,7 @@ import java.util.List;
 public interface ProductJpaDAO extends JpaRepository<Product, Long> {
     List<Product> findAllByNameLike(String name);
     List<Product> findAllByIdBetween(Long startId, Long endId);
+    List<Product> findAllByPriceBetween(Double priceFrom, Double priceTo);
 
     @Override
     void deleteById(Long aLong);
