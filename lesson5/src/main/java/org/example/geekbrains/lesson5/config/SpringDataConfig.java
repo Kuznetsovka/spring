@@ -36,7 +36,6 @@ public class SpringDataConfig implements WebMvcConfigurer {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         // Задаем источник подключения
         factory.setDataSource(getDataSource());
-
         // Задаем адаптер для конкретной реализации JPA,
         // указывает, какая именно библиотека будет использоваться в качестве
         // поставщика постоянства
@@ -50,6 +49,8 @@ public class SpringDataConfig implements WebMvcConfigurer {
 
         // Указание диалекта конкретной базы данных
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+
+        jpaProperties.put("generate-ddl",true);
 
         // Указание максимальной глубины связи
         jpaProperties.put("hibernate.max_fetch_depth", 3);
