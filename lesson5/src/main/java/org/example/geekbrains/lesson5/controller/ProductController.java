@@ -3,8 +3,6 @@ package org.example.geekbrains.lesson5.controller;
 import org.example.geekbrains.lesson5.InitData;
 import org.example.geekbrains.lesson5.domain.Product;
 import org.example.geekbrains.lesson5.service.ProductServiceImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,16 +44,19 @@ public class ProductController {
         model.addAttribute("products", products);
         return "list";
     }
-
-    // http://localhost:8090/app/products/page - GET
-    @RequestMapping(method = RequestMethod.GET)
-    @GetMapping("/page")
-    public String page(Model model){
-        Pageable pageable = PageRequest.of(0, 5, Sort.by("name").ascending());
-        products = service.getProductJpaDAO ().findByName("name", pageable);
-        model.addAttribute("products", products);
-        return "list";
-    }
+//
+//    // http://localhost:8090/app/products/page - GET
+//    @RequestMapping(method = RequestMethod.GET)
+//    @GetMapping("/page")
+//    public String page(Model model){
+//        Pageable pageable = PageRequest.of(0, 5, Sort.by("name").ascending());
+//        Page<Product> page = service.getProductJpaDAO ().findAll(pageable);
+////      products = service.getProductJpaDAO ().findByName("name", pageable);
+////      page.get ().collect(Collectors.toList()).contains ();
+////      model.addAttribute("products", products);
+//        model.addAttribute (page);
+//        return "page";
+//    }
 
     // http://localhost:8090/app/products/1 - GET
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
