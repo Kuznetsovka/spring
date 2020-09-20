@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository()
 public interface ProductJpaDAO extends JpaRepository<Product, Long> {
-    List<Product> findAllByNameLike(String name);
+    List<Product> findAllByName(String name);
     List<Product> findAllByIdBetween(Long startId, Long endId);
     List<Product> findAllByPriceBetween(Double priceFrom, Double priceTo);
 

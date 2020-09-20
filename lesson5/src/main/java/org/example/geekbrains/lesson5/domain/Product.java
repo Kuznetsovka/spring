@@ -21,14 +21,14 @@ public class Product {
 
 
     @Column(name = "price_fld")
-    private Float price;
+    private Double price;
 
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

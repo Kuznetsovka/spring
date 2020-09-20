@@ -2,7 +2,6 @@ package org.example.geekbrains.lesson5.controller;
 
 import org.example.geekbrains.lesson5.InitData;
 import org.example.geekbrains.lesson5.domain.Product;
-import org.example.geekbrains.lesson5.domain.User;
 import org.example.geekbrains.lesson5.service.ProductServiceImpl;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/products")
@@ -84,23 +84,35 @@ public class ProductController {
         return "any request " + UUID.randomUUID().toString();
     }
 
-    // http://localhost:8090/app/products?price_from=35.4&priceTo=3
+    // http://localhost:8090/app/products/like?name=asd {name:"asd"}
+    @GetMapping("/like")
+    public String filterByName(@RequestParam String name){
+        List<Product> allProducts = service.getProductJpaDAO ().findAll();
+        return allProducts.stream()
+                .filter(product-> product.getName().contains(name))
+                .map(product -> String.valueOf(product.getId()))
+                .collect(Collectors.joining(","));
+    }
+
+    // http://localhost:8090/app/products?priceFrom=35.4&priceTo=3
     @GetMapping(params = {"price_from", "priceTo"})
     public String productsByPrice(Model model,
-                                  @RequestParam(name = "price_from") double priceFrom,
+                                  @RequestParam double priceFrom,
                                   @RequestParam double priceTo){
-        List<Product> products = service.getProductJpaDAO ().findAllByPriceBetween (priceFrom, priceTo);
-        //List<Product> products = service.getProductJpaDAOImpl ().findAllBetween(priceFrom, priceTo);
+        List<Product> allProducts = service.getProductJpaDAO ().findAll();
+        List<Product> products = service.getProductJpaDAOImpl ().findAllByPriceBetween (allProducts,priceFrom, priceTo);
         model.addAttribute("products", products);
         return "list";
     }
 
-    // http://localhost:8090/app/products/filter?price_from=35.4&priceTo=3
+    // http://localhost:8090/app/products/filter?priceFrom=4&priceTo=500
     @GetMapping("/filter")
     public String filterByPrice(Model model,
-                                @RequestParam(name = "price_from") double priceFrom,
+                                @RequestParam double priceFrom,
                                 @RequestParam(required = false) Double priceTo){
-        List<Product> products = service.getProductJpaDAOImpl ().findAllByIdBetween(priceFrom, priceTo == null ? Double.MAX_VALUE : priceTo);
+        List<Product> allProducts = service.getProductJpaDAO ().findAll();
+        List<Product> products =
+                service.getProductJpaDAOImpl ().findAllByPriceBetween(allProducts,priceFrom, priceTo == null ? Double.MAX_VALUE : priceTo);
         model.addAttribute("products", products);
         return "list";
     }
@@ -116,18 +128,9 @@ public class ProductController {
         return "redirect:/products/";
     }
 
-    // http://localhost:8090/app/products/filter?name=asd
-    @RequestMapping("/filter")
-    public String filterByTitle(Model model,
-                                @RequestParam(name = "name") String name){
-        List<Product> products = service.getProductJpaDAOImpl ().findByName (name);
-        model.addAttribute("products", products);
-        return "list";
-    }
-
     // http://localhost:8090/app/products/maxupprice - GET
     @RequestMapping("/maxupprice")
-    public String maxPriceProduct(Model model){
+    public String filterByMaxPriceProduct(Model model){
         List<Product> products = service.getProductJpaDAO ().findAll (Sort.by("price").descending ());
         model.addAttribute("products", products);
         return "list";
@@ -135,20 +138,30 @@ public class ProductController {
 
     // http://localhost:8090/app/products/minupprice - GET
     @RequestMapping("/minupprice")
-    public String minPriceProduct(Model model){
+    public String filterByMinPriceProduct(Model model){
         List<Product> products = service.getProductJpaDAO ().findAll (Sort.by("price").ascending());
         model.addAttribute("products", products);
         return "list";
     }
 
-    @PostMapping("/minupprice")
-    public String minPriceProduct(User userForm){
-        return "redirect:/products/minupprice";
+    // http://localhost:8090/app/products/maxprice - GET
+    @RequestMapping("/maxprice")
+    public String maxPriceProduct(Model model){
+        Product maxProduct = service.getProductJpaDAO ().findAll (Sort.by("price").descending ()).get(0);
+        model.addAttribute("product",
+                maxProduct == null ? new Product(): maxProduct);
+        return "product";
     }
 
-    @PostMapping("/maxupprice")
-    public String maxPriceProduct(User userForm){
-        return "redirect:/products/maxupprice";
+    // http://localhost:8090/app/products/minprice - GET
+    @RequestMapping("/minprice")
+    public String minPriceProduct(Model model){
+        Product minProduct = service.getProductJpaDAO ().findAll (Sort.by("price").ascending()).get(0);
+        model.addAttribute("product",
+                minProduct == null ? new Product(): minProduct);
+        return "product";
     }
+
+
 
 }

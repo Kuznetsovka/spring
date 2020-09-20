@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductJpqlDAOImpl implements ProductDAO {
@@ -55,9 +57,11 @@ public class ProductJpqlDAOImpl implements ProductDAO {
                 .getResultList();
     }
 
-    public List<Product> findAllByIdBetween(Double start, Double end){
-        return em.createQuery("SELECT p FROM Product BETWEEN p.price=" + start + " AND p.price=" + end, Product.class)
-                .getResultList();
+    public List<Product> findAllByPriceBetween(List<Product> products, Double start, Double end){
+        return products.stream()
+                .filter(product-> product.getPrice() >= start && product.getPrice() <= end)
+                .sorted(Comparator.comparingDouble(Product::getPrice))
+                .collect(Collectors.toList());
     }
 
     @Override

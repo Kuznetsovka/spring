@@ -18,7 +18,7 @@ public class InitData {
             for (int j = 0; j < COUNT_PRODUCTS; j++) {
                 Product product = new Product ();
                 product.setName ("Product_" + i++);
-                product.setPrice ((float) (Math.random ()*1000));
+                product.setPrice ((double) (Math.random ()*1000));
                 products.add (product);
             }
     }
@@ -31,7 +31,7 @@ public class InitData {
         int i = 0;
         for (Product product : products) {
             product.setName ("Product_" + i++);
-            product.setPrice ((float) (Math.random ()*1000));
+            product.setPrice ((double) (Math.random ()*1000));
         }
     }
 
