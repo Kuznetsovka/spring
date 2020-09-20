@@ -1,6 +1,7 @@
 package org.example.geekbrains.lesson5.repository;
 
 import org.example.geekbrains.lesson5.domain.Product;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ public interface ProductJpaDAO extends JpaRepository<Product, Long> {
     List<Product> findAllByIdBetween(Long startId, Long endId);
     List<Product> findAllByPriceBetween(Double priceFrom, Double priceTo);
     Product findByNameLike(String name);
+    List<Product> findByName(String name, Pageable page);
 
     @Override
     void deleteById(Long aLong);
