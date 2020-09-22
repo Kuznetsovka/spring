@@ -8,7 +8,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <table border="1">
+<div th:insert="~{menu :: #nav-menu}"></div>
+<span th:if="${product == 0}">Product is null</span>
+    <table border="1" class="table table-hover">
         <tr>
             <td>Id</td>
             <td th:text="${product.id}">Id</td>

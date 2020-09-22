@@ -1,55 +1,73 @@
 package org.example.geekbrains.lesson6.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
     @Column(name = "id_order")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idOrder;
+    @GeneratedValue
+    private Long id;
 
-    @Column(name = "user_id")
-    private int userID;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "products_orders",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
+
+    public Long getId() {
+        return id;
+    }
+    @Autowired
+    public void setId(Long id) {
+        this.id = id;
+    }
+    @Autowired
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public Long getIdOrder() {
-        return idOrder;
+        return id;
     }
-
+    @Autowired
     public void setIdOrder(Long idOrder) {
-        this.idOrder = idOrder;
+        this.id = id;
     }
 
-    @Column(name = "product_id")
-  //  @OneToMany
-    private int productID;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
 
     public Order() {
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public int getProductID() {
-        return productID;
-    }
-
-    public void setProductID(int productID) {
-        this.productID = productID;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + idOrder +
-                ", userID=" + userID +
-                ", productID=" + productID +
+                "id=" + id +
+                ", products=" + products +
                 '}';
     }
 }

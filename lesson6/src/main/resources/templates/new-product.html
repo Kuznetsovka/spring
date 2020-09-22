@@ -8,6 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:insert="~{menu :: #nav-menu}"></div>
 
 <form th:action="@{/products/new}" th:object="${product}" method="post">
     <table border="1">

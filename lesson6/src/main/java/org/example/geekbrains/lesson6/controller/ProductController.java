@@ -56,6 +56,15 @@ public class ProductController {
 //        return "page";
 //    }
 
+    // http://localhost:8090/app/products?id=1 - GET
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String getByIdLink(Model model, @RequestParam Long id){
+        Product byId = service.findById (id);
+        model.addAttribute("product",
+                byId == null ? new Product(): byId);
+        return "product";
+    }
+
     // http://localhost:8090/app/products/1 - GET
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getById(Model model, @PathVariable("id") Long id){
@@ -83,7 +92,7 @@ public class ProductController {
     // http://localhost:8090/app/products/new - POST
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String addNewProduct(Product savedProduct){
-        service.getProductJpaDAOImpl ().save(savedProduct);
+        service.saveAndSet (savedProduct);
         System.out.println(savedProduct);
         return "redirect:/products/" + savedProduct.getId();
     }
@@ -99,11 +108,6 @@ public class ProductController {
     @GetMapping("/like")
     public String filterByName(Model model,
                                @RequestParam String name){
-//        List<Product> allProducts = service.getProductJpaDAO ().findAll();
-//        return allProducts.stream()
-//                .filter(product-> product.getName().contains(name))
-//                .map(product -> String.valueOf(product.getId()))
-//                .collect(Collectors.joining(","));
         List<Product> products = service.getProductJpaDAO ().findAllByNameLike (name);
         model.addAttribute("products", products);
         return "list";

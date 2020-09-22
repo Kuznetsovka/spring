@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserJpaDAO extends JpaRepository<User, Long> {
     List<User> findAllByName(String name);
-    List<User> findAllByIdUserBetween(Long startId, Long endId);
+    List<User> findAllByIdBetween(Long startId, Long endId);
     List<User> findAllByNameLike(String name);
     List<User> findByName(String name, Pageable page);
 

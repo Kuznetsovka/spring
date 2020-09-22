@@ -14,8 +14,8 @@ public class InitData {
     private static ArrayList<Product> products = new ArrayList<> ();
     private static ArrayList<User> users = new ArrayList<> ();
 
-    public static final double COUNT_PRODUCTS = 10;
-    public static final double COUNT_USERS = 10;
+    public static final double COUNT_PRODUCTS = 2;
+    public static final double COUNT_USERS = 2;
 
     static {
         int i = 0;

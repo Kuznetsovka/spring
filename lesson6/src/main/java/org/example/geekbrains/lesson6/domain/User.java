@@ -2,13 +2,15 @@ package org.example.geekbrains.lesson6.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @Column(name = "id_user")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idUser;
+    @GeneratedValue
+    private Long id;
     @Column(name = "name_fld")
     private String name = "Unknown";
     @Column(name = "email_fld")
@@ -17,24 +19,29 @@ public class User {
     private int age;
     @Column(name = "date_fld")
     private Date date = new Date(100,1,1);
-    @Column(name = "order_id")
-   // @ManyToOne
-    private int orderIDUser;
+
+    @OneToMany()
+    @JoinColumn(name = "order_id")
+    private List<Order> orders;
+
+    public Long getId() {
+        return id;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public Long getIdUser() {
-        return idUser;
+        return id;
     }
 
     public void setIdUser(Long idUser) {
-        this.idUser = idUser;
-    }
-
-    public int getOrderIDUser() {
-        return orderIDUser;
-    }
-
-    public void setOrderIDUser(int orderIDUser) {
-        this.orderIDUser = orderIDUser;
+        this.id = id;
     }
 
     public User() {
@@ -83,15 +90,19 @@ public class User {
         this.date = date;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + idUser +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 ", date=" + date +
-                ", orderIDUser=" + orderIDUser +
                 '}';
     }
 }

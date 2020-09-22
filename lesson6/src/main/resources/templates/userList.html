@@ -2,17 +2,16 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${title}">Some Title</title>
+    <title th:text="${name}">Some Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div th:insert="~{menu :: #nav-menu}"></div>
-<!--<span th:if="${user.size() == 0}">Products List is empty</span>-->
-<!--<table th:if="${user.size() > 0}" class="table table-hover">-->
-<!--    <thead class="thead-dark">-->
-<table border="1">
+<span th:if="${users.size() == 0}">Users List is empty</span>
+<table th:if="${users.size() > 0}" class="table table-hover">
+    <thead class="thead-dark">
     <tr>
         <td>Name</td>
         <td>Email</td>

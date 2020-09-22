@@ -8,6 +8,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:insert="~{menu :: #nav-menu}"></div>
 
 <h1>All products</h1>
 <span th:if="${products.size() == 0}">Products List is empty</span>
@@ -18,11 +19,8 @@
         <td>Price</td>
     </tr>
     <tr th:each="product : ${products}">
-        <td th:text="${product.name}"/>
+        <td><a th:href="@{/products/(id=${product.id})}" th:text="${product.name}"></a></td>
         <td th:text="${product.price}"/>
-<!--    <tr>-->
-<!--        <td><p th:each="product : ${products}" th:text="${product.name}"/></td>-->
-<!--        <td><p th:each="product : ${products}" th:text="${product.price}"/></td>-->
     </tr>
 </table>
 <form action="#" th:action="@{/products/maxupprice}" method="post">
