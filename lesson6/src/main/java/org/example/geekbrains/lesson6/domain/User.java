@@ -24,6 +24,13 @@ public class User {
     @JoinColumn(name = "order_id")
     private List<Order> orders;
 
+    public User() {
+    }
+
+    public User(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -42,13 +49,6 @@ public class User {
 
     public void setIdUser(Long idUser) {
         this.id = id;
-    }
-
-    public User() {
-    }
-
-    public User(String name) {
-        this.name = name;
     }
 
     public User(String name, String email, int age, Date date) {

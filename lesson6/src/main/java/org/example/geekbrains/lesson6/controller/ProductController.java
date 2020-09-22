@@ -97,6 +97,23 @@ public class ProductController {
         return "redirect:/products/" + savedProduct.getId();
     }
 
+    // http://localhost:8090/app/products/update?id=3 - GET
+    @GetMapping("/update")
+    public String getFormUpdateProduct(Model model,@RequestParam(name = "id") long id){
+        Product byId = service.findById (id);
+        model.addAttribute("product",
+                byId == null ? new Product(): byId);
+        return "update-product";
+    }
+
+    // http://localhost:8090/app/products/update - POST
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateProduct(Product updateProduct){
+        service.update (updateProduct);
+        System.out.println(updateProduct);
+        return "redirect:/products/" + updateProduct.getId();
+    }
+
     // http://localhost:8090/app/products/any
     @RequestMapping(value = "any")
     @ResponseBody
