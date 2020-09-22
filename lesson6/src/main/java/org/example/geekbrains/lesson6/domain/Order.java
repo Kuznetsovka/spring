@@ -6,25 +6,26 @@ import javax.persistence.*;
 @Table(name = "orders")
 public class Order {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_order")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idOrder;
+
     @Column(name = "user_id")
-    @ManyToOne
     private int userID;
+
+    public Long getIdOrder() {
+        return idOrder;
+    }
+
+    public void setIdOrder(Long idOrder) {
+        this.idOrder = idOrder;
+    }
+
     @Column(name = "product_id")
-    @OneToMany
+  //  @OneToMany
     private int productID;
 
     public Order() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getUserID() {
@@ -46,7 +47,7 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "id=" + id +
+                "id=" + idOrder +
                 ", userID=" + userID +
                 ", productID=" + productID +
                 '}';

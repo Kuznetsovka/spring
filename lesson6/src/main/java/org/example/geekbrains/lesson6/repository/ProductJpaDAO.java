@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface ProductJpaDAO extends JpaRepository<Product, Long> {
     List<Product> findAllByName(String name);
-    List<Product> findAllByIdBetween(Long startId, Long endId);
+    List<Product> findAllByIdProduct(Long id);
+    List<Product> findAllByIdProductBetween(Long startId, Long endId);
     List<Product> findAllByPriceBetween(Double priceFrom, Double priceTo);
     List<Product> findAllByNameLike(String name);
     List<Product> findByName(String name, Pageable page);

@@ -6,9 +6,9 @@ import java.util.Date;
 @Table(name = "users")
 public class User {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_user")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idUser;
     @Column(name = "name_fld")
     private String name = "Unknown";
     @Column(name = "email_fld")
@@ -18,8 +18,24 @@ public class User {
     @Column(name = "date_fld")
     private Date date = new Date(100,1,1);
     @Column(name = "order_id")
-    @ManyToOne
+   // @ManyToOne
     private int orderIDUser;
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
+
+    public int getOrderIDUser() {
+        return orderIDUser;
+    }
+
+    public void setOrderIDUser(int orderIDUser) {
+        this.orderIDUser = orderIDUser;
+    }
 
     public User() {
     }
@@ -70,7 +86,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + idUser +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +

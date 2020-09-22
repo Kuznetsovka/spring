@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductServiceImpl {
 
     private final ProductJpaDAO productJpaDAO;
+    private final UserJpaDAO userJpaDAO;
     private final ProductJpqlDAOImpl productJpaDAOImpl;
 
     public ProductJpaDAO getProductJpaDAO() {
@@ -22,8 +23,9 @@ public class ProductServiceImpl {
         return productJpaDAOImpl;
     }
 
-    public ProductServiceImpl(ProductJpaDAO productJpaDAO, ProductJpqlDAOImpl productJpaDAOImpl) {
+    public ProductServiceImpl(ProductJpaDAO productJpaDAO, UserJpaDAO userJpaDAO, ProductJpqlDAOImpl productJpaDAOImpl) {
         this.productJpaDAO = productJpaDAO;
+        this.userJpaDAO = userJpaDAO;
         this.productJpaDAOImpl = productJpaDAOImpl;
     }
 
@@ -34,7 +36,7 @@ public class ProductServiceImpl {
 
     @Transactional
     public void saveAndSet(User user){
-        Product savedProduct = UserJpaDAO.save(user);
+        User savedUser = userJpaDAO.save(user);
     }
 
     @Transactional(readOnly = true)

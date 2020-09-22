@@ -6,7 +6,6 @@ import org.example.geekbrains.lesson6.domain.User;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class InitData {
 
@@ -27,29 +26,31 @@ public class InitData {
             products.add (product);
         }
         i = 0;
-        for (int j = 0; j < COUNT_PRODUCTS; j++) {
+        for (int j = 0; j < COUNT_USERS; j++) {
             User user = new User ();
             user.setName ("User_" + i++);
             user.setEmail (user.getName () + "@mail.ru");
             user.setAge ((int) (Math.random ()*100));
-            GregorianCalendar gc = new GregorianCalendar();
-            gc.set(gc.YEAR, randBetween(1900,2020));
-            user.setDate (new Date(gc.YEAR,1,1));
+            user.setDate (new Date(randBetween(0,2020),1,1));
             users.add (user);
         }
     }
 
     public static void initData(EntityManager em){
         initProducts(em);
+        initUsers(em);
     }
 
-    public static void initArticlesData(){
-        int i = 0;
-        for (Product product : products) {
-            product.setName ("Product_" + i++);
-            product.setPrice ((double) (Math.random ()*1000));
+    private static void initUsers(EntityManager em) {
+        em.getTransaction().begin();
+
+        System.out.println("Users initialized");
+        for (User user : users) {
+            em.merge(user);
         }
+        em.getTransaction().commit();
     }
+
 
     public static ArrayList<User> getUsers() {
         return users;
@@ -72,6 +73,10 @@ public class InitData {
 
     public static void setProducts(ArrayList<Product> products) {
         InitData.products = products;
+    }
+
+    public static void setUsers(ArrayList<User> users) {
+        InitData.users = users;
     }
 
     public static int randBetween(int start, int end) {

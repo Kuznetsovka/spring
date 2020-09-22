@@ -6,9 +6,9 @@ import javax.persistence.*;
         @Table(name = "products")
 public class Product {
     @Id
-    @Column(name = "id")
+    @Column(name = "id_product")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idProduct;
 
     @Column(name = "name_fld")
     private String name;
@@ -17,7 +17,7 @@ public class Product {
     private Double price;
 
     @Column(name = "order_id")
-    @OneToOne
+   // @OneToOne
     private Double orderID;
 
 
@@ -41,17 +41,17 @@ public class Product {
     }
 
     public Long getId() {
-        return id;
+        return idProduct;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idProduct = idProduct;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
+                "id=" + idProduct +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", orderID=" + orderID +

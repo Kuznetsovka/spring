@@ -38,7 +38,7 @@ public class ProductController {
     @RequestMapping(method = RequestMethod.GET)
     @GetMapping("/list")
     public String list(Model model){
-        products = service.getProductJpaDAOImpl ().findAll ();
+        products = service.getProductJpaDAO ().findAll ();
         model.addAttribute("products", products);
         return "list";
     }
@@ -59,7 +59,7 @@ public class ProductController {
     // http://localhost:8090/app/products/1 - GET
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getById(Model model, @PathVariable("id") Long id){
-        Product byId = service.getProductJpaDAOImpl ().findById (id);
+        Product byId = service.findById (id);
         model.addAttribute("product",
                 byId == null ? new Product(): byId);
         return "product";
@@ -69,7 +69,7 @@ public class ProductController {
     @RequestMapping(value = "/{id}/price", method = RequestMethod.GET)
     @ResponseBody
     public String apiPrice(@PathVariable Long id){
-        Product byId = service.getProductJpaDAOImpl ().findById (id);
+        Product byId = service.findById (id);
         return String.valueOf(byId == null ? null : byId.getPrice());
     }
 

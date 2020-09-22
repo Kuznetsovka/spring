@@ -1,27 +1,17 @@
 package org.example.geekbrains.lesson6.repository;
 
 import org.example.geekbrains.lesson6.domain.User;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public class UserJpaDAO extends JpaRepository<User, Long> {
-    List<User> findAllById
-    @Override
-    public Optional<User> findById(Long aLong) {
-        return Optional.empty ();
-    }
+public interface UserJpaDAO extends JpaRepository<User, Long> {
+    List<User> findAllByName(String name);
+    List<User> findAllByIdUserBetween(Long startId, Long endId);
+    List<User> findAllByNameLike(String name);
+    List<User> findByName(String name, Pageable page);
 
     @Override
-    public List<User> findAll() {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Long aLong) {
-
-    }
+    void deleteById(Long aLong);
 }
