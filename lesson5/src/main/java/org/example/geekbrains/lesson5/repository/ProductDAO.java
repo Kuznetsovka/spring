@@ -8,8 +8,6 @@ public interface ProductDAO {
     List<Product> findAll();
     Product findById(Long id);
     List<Product> findByName(String name);
-    Product findMaxPrice();
-    Product findMinPrice();
     void save(Product product);
     void update(Product product);
     void delete(Product product);

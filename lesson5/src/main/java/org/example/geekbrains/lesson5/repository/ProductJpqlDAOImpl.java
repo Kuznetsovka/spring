@@ -36,17 +36,6 @@ public class ProductJpqlDAOImpl implements ProductDAO {
                 .setParameter("name", name).getResultList();
     }
 
-    @Override
-    public Product findMaxPrice() {
-        return em.createQuery (Product.PRODUCT_FIND_MAX_PRICE,Product.class).getSingleResult ();
-    }
-
-    @Override
-    public Product findMinPrice() {
-        return em.createQuery("SELECT p FROM Product p ORDER BY price ASC", Product.class)
-                .getSingleResult();
-    }
-
     public List<Product> filterMinPrice() {
         return em.createQuery("SELECT p FROM Product p ORDER BY price ASC", Product.class)
                 .getResultList();
