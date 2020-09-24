@@ -10,7 +10,8 @@ import java.util.List;
 public class Order {
     @Id
     @Column(name = "id_order")
-    @GeneratedValue
+    @SequenceGenerator(name = "seqOrder", sequenceName = "seqOrder", allocationSize = 100)
+    @GeneratedValue(generator = "seqOrder")
     private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)

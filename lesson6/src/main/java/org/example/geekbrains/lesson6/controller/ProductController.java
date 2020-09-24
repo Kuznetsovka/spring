@@ -158,7 +158,7 @@ public class ProductController {
         service.delete (id);
         System.out.println("Удален продукт с id" + id);
         model.addAttribute("products", products);
-        return "redirect:/products/";
+        return "redirect:/products";
     }
 
     // http://localhost:8090/app/products/maxupprice - GET

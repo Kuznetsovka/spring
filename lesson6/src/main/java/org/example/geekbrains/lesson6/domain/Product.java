@@ -10,7 +10,8 @@ import java.util.List;
 public class Product {
     @Id
     @Column(name = "id_product")
-    @GeneratedValue
+    @SequenceGenerator(name = "seqProduct", sequenceName = "seqProduct", allocationSize = 100)
+    @GeneratedValue(generator = "seqProduct")
     private Long id;
 
     @Column(name = "name_fld")

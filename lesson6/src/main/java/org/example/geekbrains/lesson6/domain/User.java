@@ -9,7 +9,8 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "id_user")
-    @GeneratedValue
+    @SequenceGenerator(name = "seqUser", sequenceName = "seqUser", allocationSize = 100)
+    @GeneratedValue(generator = "seqUser")
     private Long id;
     @Column(name = "name_fld")
     private String name = "Unknown";
