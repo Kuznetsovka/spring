@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}">Some Title</title>
@@ -11,22 +11,18 @@
 <img src="statico/img/logo.png"/>
 <div th:insert="~{menu :: #nav-menu}"></div>
 
-<h2>Hello, next will be dynamic value</h2>
-<h2 th:text="${message}">text of message</h2>
-<input type="text" name="user" value="SimpleUser" th:value="${user.name}"/><br>
-<img src="statico/img/logo.png"/>
-
-<h2>Random value</h2>
-<h3 th:text="${@mathService.randomInt()}">1234</h3>
+<a th:href="@{/users}">Users</a><br>
+<a th:href="@{/login}">Login</a><br>
 
 
-<h2>I18N Messages dfgsdfgsdfg</h2>
-<h3 th:text="#{welcome.message}"></h3>
+<div sec:authorize="isAuthenticated()">
+    <h2> Next information only for authenticated</h2>
+    Authenticated username:
+    <div sec:authentication="principal.username"></div>
+    Authenticated user roles:
+    <div sec:authentication="principal.authorities"></div>
+</div>
 
-<h2>I18N Messages with parameter</h2>
-<h3 th:text="#{welcome.user.message(${user.name})}"></h3>
-
-<h2>Size of user list</h2>
 <h3 th:text="${users.size()}"></h3> <a th:href="@{/users}">Link</a>
 
 

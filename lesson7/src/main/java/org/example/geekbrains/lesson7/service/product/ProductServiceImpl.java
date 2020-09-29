@@ -30,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
         return mapper.fromProduct(dao.getOne(id));
     }
 
+    @Override
+    public Product getById(Long id) {
+        return dao.findById(id).orElse(null);
+    }
+
     @Transactional
     public void saveAndSet(Product product){
         dao.save(product);

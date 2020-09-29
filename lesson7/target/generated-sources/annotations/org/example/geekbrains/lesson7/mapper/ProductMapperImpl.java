@@ -8,7 +8,7 @@ import org.example.geekbrains.lesson7.dto.ProductDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-27T23:15:18+0300",
+    date = "2020-09-29T23:16:24+0300",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_231 (Oracle Corporation)"
 )
 public class ProductMapperImpl implements ProductMapper {

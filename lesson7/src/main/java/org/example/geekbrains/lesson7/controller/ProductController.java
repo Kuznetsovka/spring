@@ -102,7 +102,7 @@ public class ProductController {
     // http://localhost:8090/app/products/update?id=3 - GET
     @GetMapping("/update")
     public String getFormUpdateProduct(Model model,@RequestParam(name = "id") long id){
-        ProductDto byId = service.findById (id);
+        Product byId = service.getById (id);
         model.addAttribute("product",
                 byId == null ? new ProductDto(): byId);
         return "update-product";

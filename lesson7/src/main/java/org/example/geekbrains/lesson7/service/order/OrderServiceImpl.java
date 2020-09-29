@@ -20,6 +20,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order getById(Long id) {
+        return dao.findById(id).orElse(null);
+    }
+
+    @Override
     public OrderDto findById(Long id) {
         return mapper.fromOrder(dao.getOne(id));
     }

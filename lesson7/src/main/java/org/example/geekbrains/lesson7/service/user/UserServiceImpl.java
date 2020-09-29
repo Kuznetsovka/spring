@@ -5,12 +5,15 @@ import org.example.geekbrains.lesson7.dao.UserDao;
 import org.example.geekbrains.lesson7.domain.User;
 import org.example.geekbrains.lesson7.dto.UserDto;
 import org.example.geekbrains.lesson7.mapper.UserMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,6 +36,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto findById(Long id) {
         return mapper.fromUser(dao.getOne (id));
+    }
+
+    @Override
+    public User getById(Long id) {
+        return dao.findById(id).orElse(null);
+    }
+
+    @Override
+    public User auth(String username, String password) {
+        if(username == null || username.isEmpty()){
+            System.out.println("You are not authenticated");
+            return null;
+        }
+        User user = dao.findFirstByName(username);
+        if(user == null){
+            System.out.println("You are not authenticated");
+            return null;
+        }
+        if(!Objects.equals(password, user.getPassword())){
+            System.out.println("You are not authenticated");
+            return null;
+        }
+        System.out.println("You are authenticated");
+        return user;
     }
 
     @Override
@@ -59,5 +86,10 @@ public class UserServiceImpl implements UserService {
         em.getTransaction().begin();
         em.merge(user);
         em.getTransaction().commit();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return dao.findFirstByName(username);
     }
 }

@@ -8,9 +8,11 @@ import java.util.List;
 
 public interface UserDao extends JpaRepository<User, Long> {
     List<User> findAllByName(String name);
+    List<User> findAll();
     List<User> findAllByIdBetween(Long startId, Long endId);
     List<User> findAllByNameLike(String name);
     List<User> findByName(String name, Pageable page);
+    User findFirstByName(String name);
 
     @Override
     void deleteById(Long aLong);
