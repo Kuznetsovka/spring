@@ -68,6 +68,7 @@ public class ProductController {
     // http://localhost:8090/app/products/1 - GET
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getById(Model model, @PathVariable("id") Long id){
+        checkById(id);
         List<Product> byId = productDao.findAllById (id);
         model.addAttribute("product",
                 byId == null ? new Product(): byId.get (0));
@@ -78,6 +79,7 @@ public class ProductController {
     @RequestMapping(value = "/{id}/price", method = RequestMethod.GET)
     @ResponseBody
     public String apiPrice(@PathVariable Long id){
+        checkById(id);
         List<Product> byId = productDao.findAllById (id);
         return String.valueOf(byId == null ? null : byId.get (0).getPrice());
     }
@@ -154,6 +156,7 @@ public class ProductController {
     @RequestMapping(value = "/delete")
     public String removeById(Model model,
                              @RequestParam(name = "id") long id){
+        checkById(id);
         products.remove (service.findById (id));
         productDao.deleteById (id);
         System.out.println("Удален продукт с id" + id);
