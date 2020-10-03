@@ -35,25 +35,11 @@ public class ProductController {
 
     // http://localhost:8090/app/products - GET
     @RequestMapping(method = RequestMethod.GET)
-    @GetMapping("/list")
     public String list(Model model){
         products = productDao.findAll ();
         model.addAttribute("products", products);
         return "list";
     }
-//
-//    // http://localhost:8090/app/products/page - GET
-//    @RequestMapping(method = RequestMethod.GET)
-//    @GetMapping("/page")
-//    public String page(Model model){
-//        Pageable pageable = PageRequest.of(0, 5, Sort.by("name").ascending());
-//        Page<Product> page = service.getProductJpaDAO ().findAll(pageable);
-////      products = service.getProductJpaDAO ().findByName("name", pageable);
-////      page.get ().collect(Collectors.toList()).contains ();
-////      model.addAttribute("products", products);
-//        model.addAttribute (page);
-//        return "page";
-//    }
 
     // http://localhost:8090/app/products?id=1 - GET
     @RequestMapping(value = "/",method = RequestMethod.GET)

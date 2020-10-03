@@ -29,8 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/users","/users/**").hasAuthority(Role.ADMIN.name())
-                .antMatchers("/users/new").hasAuthority(Role.SUPER_ADMIN.name())
+                .antMatchers("/users","/users/**").hasAnyAuthority(Role.ADMIN.name(),Role.SUPER_ADMIN.name())
                 .antMatchers("/products").hasAnyAuthority(Role.ADMIN.name(), Role.MANAGER.name(),Role.SUPER_ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
